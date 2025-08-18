@@ -1,8 +1,10 @@
 add_rules("mode.debug", "mode.release")
+set_languages("c11", "c++17")
 
 target("a2")
     set_kind("binary")
     add_files("src/*.c")
+    add_files("src/*.cpp")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
