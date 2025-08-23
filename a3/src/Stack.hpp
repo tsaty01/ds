@@ -78,12 +78,7 @@ public:
         return *this;
     }
 
-    ~Stack() {
-        delete[] m_data;
-        m_data     = nullptr;
-        m_size     = 0;
-        m_capacity = 0;
-    }
+    ~Stack() { free(); }
 
     std::size_t size() const { return m_size; }
 
