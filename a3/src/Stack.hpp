@@ -99,16 +99,18 @@ public:
     }
 
     void push(const T& item) {
-        if (m_capacity == 0) reserve(INITIAL_CAP);
-        if (m_size >= m_capacity) {
+        if (m_capacity == 0) {
+            reserve(INITIAL_CAP);
+        } else if (m_size >= m_capacity) {
             reserve(2 * m_capacity);
         }
         m_data[m_size++] = item;
     }
 
     void push(T&& item) {
-        if (m_capacity == 0) reserve(INITIAL_CAP);
-        if (m_size >= m_capacity) {
+        if (m_capacity == 0) {
+            reserve(INITIAL_CAP);
+        } else if (m_size >= m_capacity) {
             reserve(2 * m_capacity);
         }
         m_data[m_size++] = item;
