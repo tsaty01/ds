@@ -2,9 +2,11 @@
 // Satyam Tiwari (1024030088)
 
 /*
+clang-format off
 -----------------------------------------------------------------------------------------------------------------------------------
 |                                                       ADDITIONAL QUESTIONS                                                      |
 -----------------------------------------------------------------------------------------------------------------------------------
+clang-format on
 */
 
 /*
@@ -30,67 +32,63 @@ Sample Inputs:
 */
 
 int main() {
-  vector<int> arr;
-  int n;
-  cout << "Enter the size of array: ";
-  cin >> n;
+    vector<int> arr;
+    int n;
+    cout << "Enter the size of array: ";
+    cin >> n;
 
-  arr.resize(n);
-  for (int i = 0; i < n; ++i) {
-    cin >> arr[i];
-  }
-
-  int target;
-  cout << "Enter the positive integer (k): ";
-  cin >> target;
-
-  sort(arr.begin(), arr.end());
-
-  int left = 0;
-  int right = 0;
-  n = arr.size();
-  vector<pair<int, int>> targetPairs;
-
-  while (right < n) {
-    int val = arr[right] - arr[left];
-    if (val == target) {
-      targetPairs.emplace_back(left, right);
-
-      int i = left, j = right;
-
-      while (i < n && arr[i] == arr[i + 1]) {
-        targetPairs.emplace_back(i + 1, right);
-        i++;
-      }
-
-      while (j < n && arr[j] == arr[j + 1]) {
-        targetPairs.emplace_back(left, j + 1);
-        j++;
-      }
-
-      if (i == left)
-        left = ++i;
-      else
-        left = i;
-      if (j == right)
-        right = ++j;
-      else
-        right = j;
-
-    } else if (val < target) {
-      right++;
-    } else if (val > target) {
-      left++;
+    arr.resize(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
     }
-  }
 
-  for (const auto &pair : targetPairs) {
-      // Indexes are from sorted array
-      printf("[%d, %d]\n", arr[pair.first], arr[pair.second]);
-      // printf("[%d, %d]\n", pair.first, pair.second);
-  }
+    int target;
+    cout << "Enter the positive integer (k): ";
+    cin >> target;
 
-  return 0;
+    sort(arr.begin(), arr.end());
+
+    int left  = 0;
+    int right = 0;
+    n         = arr.size();
+    vector<pair<int, int>> targetPairs;
+
+    while (right < n) {
+        int val = arr[right] - arr[left];
+        if (val == target) {
+            targetPairs.emplace_back(left, right);
+
+            int i = left, j = right;
+
+            while (i < n && arr[i] == arr[i + 1]) {
+                targetPairs.emplace_back(i + 1, right);
+                i++;
+            }
+
+            while (j < n && arr[j] == arr[j + 1]) {
+                targetPairs.emplace_back(left, j + 1);
+                j++;
+            }
+
+            if (i == left) left = ++i;
+            else left = i;
+            if (j == right) right = ++j;
+            else right = j;
+
+        } else if (val < target) {
+            right++;
+        } else if (val > target) {
+            left++;
+        }
+    }
+
+    for (const auto& pair : targetPairs) {
+        // Indexes are from sorted array
+        printf("[%d, %d]\n", arr[pair.first], arr[pair.second]);
+        // printf("[%d, %d]\n", pair.first, pair.second);
+    }
+
+    return 0;
 }
 
 /*
@@ -108,56 +106,58 @@ https://www.codechef.com/practice/course/nutanix-interview-questions/NUTANIXCON0
 using namespace std;
 
 int main() {
-  string str;
-  cout << "Enter the string to split: ";
-  getline(cin, str);
+    string str;
+    cout << "Enter the string to split: ";
+    getline(cin, str);
 
-  int n = str.length();
-  const char *data = str.data();
+    int n            = str.length();
+    const char* data = str.data();
 
-  bool can_split = false;
-  for (int i = 1; i < n - 1; ++i) {
-    for (int j = i + 1; j < n; ++j) {
-      string_view s1v(data, i);
-      string_view s2v(data + i, j - i);
-      string_view s3v(data + j, n - j);
+    bool can_split = false;
+    for (int i = 1; i < n - 1; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            string_view s1v(data, i);
+            string_view s2v(data + i, j - i);
+            string_view s3v(data + j, n - j);
 
-      if (s2v.find(s1v) != string::npos && s3v.find(s1v) != string::npos) {
-        can_split = true;
-        cout << s1v << '\n';
-        cout << s2v << '\n';
-        cout << s3v << '\n';
-        cout << '\n';
-        break;
-      }
+            if (s2v.find(s1v) != string::npos
+                && s3v.find(s1v) != string::npos) {
+                can_split = true;
+                cout << s1v << '\n';
+                cout << s2v << '\n';
+                cout << s3v << '\n';
+                cout << '\n';
+                break;
+            }
 
-      if (s1v.find(s2v) != string::npos && s3v.find(s2v) != string::npos) {
-        can_split = true;
-        cout << s1v << '\n';
-        cout << s2v << '\n';
-        cout << s3v << '\n';
-        cout << '\n';
-        break;
-      }
+            if (s1v.find(s2v) != string::npos
+                && s3v.find(s2v) != string::npos) {
+                can_split = true;
+                cout << s1v << '\n';
+                cout << s2v << '\n';
+                cout << s3v << '\n';
+                cout << '\n';
+                break;
+            }
 
-      if (s1v.find(s3v) != string::npos && s2v.find(s3v) != string::npos) {
-        can_split = true;
-        cout << s1v << '\n';
-        cout << s2v << '\n';
-        cout << s3v << '\n';
-        cout << '\n';
-        break;
-      }
+            if (s1v.find(s3v) != string::npos
+                && s2v.find(s3v) != string::npos) {
+                can_split = true;
+                cout << s1v << '\n';
+                cout << s2v << '\n';
+                cout << s3v << '\n';
+                cout << '\n';
+                break;
+            }
+        }
+        if (can_split) break;
     }
-    if (can_split)
-      break;
-  }
 
-  if (can_split) {
-    cout << "The string can be split into 3 parts\n";
-  }
+    if (can_split) {
+        cout << "The string can be split into 3 parts\n";
+    }
 
-  return 0;
+    return 0;
 }
 
 /*
@@ -175,28 +175,28 @@ https://www.codechef.com/practice/course/nutanix-interview-questions/NUTANIXCON0
 using namespace std;
 
 int main() {
-  string str1, str2;
+    string str1, str2;
 
-  cout << "Enter string (str1): ";
-  getline(cin, str1);
+    cout << "Enter string (str1): ";
+    getline(cin, str1);
 
-  cout << "Enter string (str2): ";
-  getline(cin, str2);
+    cout << "Enter string (str2): ";
+    getline(cin, str2);
 
-  bool anagrams = false;
-  if (str1.size() == str1.size()) {
-    sort(str1.begin(), str1.end());
-    sort(str2.begin(), str2.end());
-    if (str1 == str2) anagrams = true;
-  }
+    bool anagrams = false;
+    if (str1.size() == str1.size()) {
+        sort(str1.begin(), str1.end());
+        sort(str2.begin(), str2.end());
+        if (str1 == str2) anagrams = true;
+    }
 
-  if (anagrams) {
-    cout << "Both strings are anagrams.\n";
-  } else {
-    cout << "Both strings are not anagrams.\n";
-  }
+    if (anagrams) {
+        cout << "Both strings are anagrams.\n";
+    } else {
+        cout << "Both strings are not anagrams.\n";
+    }
 
-  return 0;
+    return 0;
 }
 
 /*
@@ -225,29 +225,24 @@ int main() {
     }
     n = arr.size();
 
-    int low = 0;
-    int mid = 0;
+    int low  = 0;
+    int mid  = 0;
     int high = n - 1;
 
     while (mid <= high) {
         switch (arr[mid]) {
-        case 0:
-            swap(arr[mid], arr[low]);
-            mid++;
-            low++;
-            break;
-        case 1:
-            mid++;
-            break;
-        case 2:
-            swap(arr[mid], arr[high]);
-            high--;
-            break;
-        default:
-            cout << "Unexpected element: " << arr[mid];
-            break;
+            case 0:
+                swap(arr[mid], arr[low]);
+                mid++;
+                low++;
+                break;
+            case 1: mid++; break;
+            case 2:
+                swap(arr[mid], arr[high]);
+                high--;
+                break;
+            default: cout << "Unexpected element: " << arr[mid]; break;
         }
-
     }
 
     cout << "[";
