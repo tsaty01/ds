@@ -14,7 +14,9 @@ void q3() {
     getline(cin, str);
 
     Stack<char> parens;
+    bool balanced = true;
     for (const auto& ch : str) {
+        if (!balanced) break;
         switch (ch) {
             case '(':
             case '{':
@@ -24,22 +26,34 @@ void q3() {
             }
 
             case ')': {
+                if (parens.isEmpty()) {
+                    balanced = false;
+                    break;
+                }
                 char* p = parens.peek();
-                if (p && *p == '(') {
+                if (*p == '(') {
                     parens.pop();
                 }
                 break;
             }
             case '}': {
+                if (parens.isEmpty()) {
+                    balanced = false;
+                    break;
+                }
                 char* p = parens.peek();
-                if (p && *p == '{') {
+                if (*p == '{') {
                     parens.pop();
                 }
                 break;
             }
             case ']': {
+                if (parens.isEmpty()) {
+                    balanced = false;
+                    break;
+                }
                 char* p = parens.peek();
-                if (p && *p == '[') {
+                if (*p == '[') {
                     parens.pop();
                 }
                 break;
@@ -47,5 +61,5 @@ void q3() {
             default: break;
         }
     }
-    cout << (parens.isEmpty() ? "Balanced" : "Unbalanced") << '\n';
+    cout << (balanced && parens.isEmpty() ? "Balanced" : "Unbalanced") << '\n';
 }

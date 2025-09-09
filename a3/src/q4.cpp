@@ -76,7 +76,7 @@ string infix_to_postfix(const string& expr) {
             case '*':
             case '+':
             case '-': {
-                char *op, *two = nullptr;
+                char* op = nullptr;
                 while ((op = operator_stack.peek())
                        && is_higher_precedence(*op, ch)) {
                     postfix_expr.push(*op);

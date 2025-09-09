@@ -150,7 +150,7 @@ public:
 template <>
 inline Stack<char>::Stack(const char* str) {
     int len = 0;
-    while (str[len]) {
+    while (str + len) {
         push(str[len++]);
     }
 }
